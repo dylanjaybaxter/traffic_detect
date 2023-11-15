@@ -54,9 +54,9 @@ num_classes = max(len(trainloader.dataset.classes), len(testloader.dataset.class
 start_epoch = 0
 net = Net(num_classes=num_classes)
 if args.resume:
-    assert os.path.isfile("./checkpoint/ckpt.t7"), "Error: no checkpoint file found!"
-    print('Loading from checkpoint/ckpt.t7')
-    checkpoint = torch.load("./checkpoint/ckpt.t7")
+    assert os.path.isfile("./checkpoint/bdd_ckpt.t7"), "Error: no checkpoint file found!"
+    print('Loading from checkpoint/bdd_ckpt.t7')
+    checkpoint = torch.load("./checkpoint/bdd_ckpt.t7")
     # import ipdb; ipdb.set_trace()
     net_dict = checkpoint['net_dict']
     net.load_state_dict(net_dict)
