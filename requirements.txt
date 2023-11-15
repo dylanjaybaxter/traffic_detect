@@ -3,5 +3,3 @@ numpy
 opencv-python
 pyyaml
 flask
-torch
-torchvision
