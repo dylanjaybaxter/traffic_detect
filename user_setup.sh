@@ -11,12 +11,12 @@ if [ $# -ne 0 ] ; then
         python3 -c "import $package_name" &> /dev/null
         if [ $? -ne 0 ]; then
             echo "The package '$package_name' is not installed."
-            python3 -m pip install --target=$python_dir $package_name
+            python3 -m pip install -r --target=$python_dir $package_name
         else
             echo "The package '$package_name' is installed."
         fi
     }
-    check_python_package "-r requirements.txt"
+    check_python_package "requirements.txt"
     export PATH=$PATH:${python_dir}bin/
 
 else
