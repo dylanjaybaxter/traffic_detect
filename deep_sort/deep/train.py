@@ -17,6 +17,8 @@ parser.add_argument("--gpu-id",default=0,type=int)
 parser.add_argument("--lr",default=0.1, type=float)
 parser.add_argument("--interval",'-i',default=20,type=int)
 parser.add_argument('--resume', '-r',action='store_true')
+parser.add_argument("--ckpt", type=str, default="./checkpoint/ckpt_orig.t7")
+parser.add_argument("--save", type=str, default="./checkpoint/ckpt_bdd.t7")
 args = parser.parse_args()
 
 # device
@@ -54,9 +56,9 @@ num_classes = max(len(trainloader.dataset.classes), len(testloader.dataset.class
 start_epoch = 0
 net = Net(num_classes=num_classes)
 if args.resume:
-    assert os.path.isfile("./checkpoint/bdd_ckpt.t7"), "Error: no checkpoint file found!"
-    print('Loading from checkpoint/bdd_ckpt.t7')
-    checkpoint = torch.load("./checkpoint/bdd_ckpt.t7")
+    assert os.path.isfile(args.ckpt), "Error: no checkpoint file found!"
+    print(f"Loading from {args.ckpt}")
+    checkpoint = torch.load(args.ckpt)
     # import ipdb; ipdb.set_trace()
     net_dict = checkpoint['net_dict']
     net.load_state_dict(net_dict)
@@ -142,7 +144,7 @@ def test(epoch):
         }
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
-        torch.save(checkpoint, './checkpoint/bdd_ckpt.t7')
+        torch.save(checkpoint, args.save)
 
     return test_loss/len(testloader), 1.- correct/total
 
