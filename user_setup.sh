@@ -1,6 +1,7 @@
 #!/bin/bash/
 
 if [ $# -ne 0 ] ; then
+    export PATH=$PATH:${python_dir}bin/
     # Create local site package dir and download python dependencies
     python_dir=$1
     mkdir $python_dir
@@ -17,7 +18,7 @@ if [ $# -ne 0 ] ; then
         fi
     }
     check_python_package "requirements.txt"
-    export PATH=$PATH:${python_dir}bin/
+
 
 else
     echo "Please enter a username in the form:"
