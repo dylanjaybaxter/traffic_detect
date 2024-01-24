@@ -1,9 +1,9 @@
 #!/bin/bash/
 
 if [ $# -ne 0 ] ; then
-    export PATH=$PATH:${python_dir}bin/
     # Create local site package dir and download python dependencies
     python_dir=$1
+    export PATH=$PATH:${python_dir}bin/
     mkdir $python_dir
     python3 -c "import sys; sys.path.append(\"${python_dir}\")"
     export PYTHONPATH=$PYTHONPATH:${python_dir}
@@ -12,7 +12,7 @@ if [ $# -ne 0 ] ; then
         python3 -c "import $package_name" &> /dev/null
         if [ $? -ne 0 ]; then
             echo "The package '$package_name' is not installed."
-            python3 -m pip install -r --target=$python_dir $package_name
+            python3 -m pip install -r $package_name -t $python_dir
         else
             echo "The package '$package_name' is installed."
         fi
