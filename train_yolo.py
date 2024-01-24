@@ -39,7 +39,7 @@ def main_func(args):
     model = YOLO(conf['model'])
 
     # Do Training
-    model.train(cfg=args.config)
+    model.train(cfg=args.config, data=conf['data'])
 
     # Kill TensorBoard
     tb.kill()
