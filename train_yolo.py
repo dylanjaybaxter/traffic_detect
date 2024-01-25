@@ -41,8 +41,6 @@ def main_func(args):
     # Do Training
     model.train(cfg=args.config, data=conf['data'])
 
-    # Kill TensorBoard
-    tb.kill()
 
 # Main func wrapper
 if __name__ == "__main__":
